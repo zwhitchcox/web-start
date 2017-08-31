@@ -21,6 +21,13 @@ module.exports = [
           use: ['source-map-loader'],
           enforce: 'pre',
         },
+        {
+          test: /\.css$/,
+          use: [
+            { loader: "style-loader" },
+            { loader: "css-loader" }
+          ]
+        }
       ]
     },
     plugins: [],
@@ -30,13 +37,13 @@ module.exports = [
     }
   },
   {
-    entry: `${__dirname}/src/browser.js`,
+    entry: `${__dirname}/src/app.js`,
     output: {
       path: path.resolve(__dirname, 'dist/public'),
       filename: 'browser.js',
     },
     plugins: [
-      new Html(),
+      new Html({template: path.resolve(__dirname, 'src/index.html')}),
     ],
     module: {
       rules: [
@@ -50,6 +57,13 @@ module.exports = [
           use: ['source-map-loader'],
           enforce: 'pre',
         },
+        {
+          test: /\.css$/,
+          use: [
+            { loader: "style-loader" },
+            { loader: "css-loader" }
+          ]
+        }
       ]
     },
     target: 'web',
