@@ -20,13 +20,6 @@ module.exports = [
           test: /\.js$/,
           use: ['source-map-loader'],
           enforce: 'pre',
-        },
-        {
-          test: /\.css$/,
-          use: [
-            { loader: "style-loader" },
-            { loader: "css-loader" }
-          ]
         }
       ]
     },
@@ -63,7 +56,11 @@ module.exports = [
             { loader: "style-loader" },
             { loader: "css-loader" }
           ]
-        }
+        },
+        {
+          test: /\.(png|woff|woff2|eot|ttf|svg)$/,
+            use: 'url-loader?limit=100000'
+        },
       ]
     },
     target: 'web',
