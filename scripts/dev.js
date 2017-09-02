@@ -24,14 +24,17 @@ serverCompiler.watch({}, (err, stats) => {
 
 process.on('exit', () => server && server.kill('SIGTERM'))
 
+webConf.entry = [].concat('webpack-dev-server/client?http://localhost:9000/', webConf.entry)
+
 const webCompiler = webpack(webConf)
+
 const devServer = new WebpackDevServer(webCompiler, {
   stats: {
     colors: true,
     debug: true,
   },
 })
-devServer.listen(9000, '127.0.0.1', () => console.log('starting server on localhost:9000'))
+devServer.listen(9000, '127.0.0.1', () => console.log('started file server on localhost:9000'))
 
 function handleErrors(err, stats) {
   const info = stats.toJson()
